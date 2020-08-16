@@ -1,0 +1,5 @@
+This repository consists of two modules that can extract keyword from documents:
+1. TF/IDF
+2. RAKE
+
+TF/IDF can be fast and effective; But RAKE is more intuitive for phrases longer than a single word.

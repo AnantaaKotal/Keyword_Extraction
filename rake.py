@@ -2,31 +2,38 @@ import glob
 import os
 import re
 from rake_nltk import Rake
-from nltk.corpus import stopwords
 
-path = "/Users/anantaa/Desktop/python/keyword_search/stories"
+path = "INSERT PATH HERE"
 
-# number of keywords to be extracted; initialised to 10
-number_of_keywords = 10
 
-# USE THIS TO CREATE YOUR CORPUS FROM .TXT FILES
-def extract_corpus():
+# RAKE MODULE; RETURNS KEYWORDS FOR EACH DOCUMENT
+def rake():
+    # exhaustive list of stop words
     stop_dir = "SmartStoplist.txt"
+
+    # initializing rake module
+    # min_length = minimum number of words in keyword phrases
+    # max_length = maximum number of words in keyword phrases
+    # adjust min_length and max_length to your preference
     r = Rake(stopwords=stop_dir, min_length=1, max_length=4)
 
+    # reading from file
     for file in glob.glob(os.path.join(path, '*.txt')):
         f = open(file, 'r', encoding='latin-1')
         text = f.read()
         f.close()
 
-        # FORMATTING THE TEXT FOR PRETTY PRINT
+        # formatting text for pretty print
         text = text.replace('.', ' ')
         text = re.sub(r'\s+', ' ', re.sub(r'[^\w \s]', '', text)).lower()
 
+        # extracting keywords
         r.extract_keywords_from_text(text)
 
-        a = r.get_ranked_phrases()
-        print(a)
+        # printing ranked phrases
+        ranked_phrases = r.get_ranked_phrases()
+        print(ranked_phrases)
 
 
-extract_corpus()
+# calling rake module
+rake()

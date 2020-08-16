@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import stopwords
 
-path = "/Users/anantaa/Desktop/python/keyword_search/stories"
+path = "INSERT PATH HERE"
 
 # number of keywords to be extracted; initialised to 10
 number_of_keywords = 10
@@ -19,7 +19,7 @@ def extract_corpus():
         text = f.read()
         f.close()
 
-        # FORMATTING THE TEXT FOR PRETTY PRINT
+        # formatting text for pretty print
         text = text.replace('.', ' ')
         text = re.sub(r'\s+', ' ', re.sub(r'[^\w \s]', '', text)).lower()
         corpus.append(text)
@@ -49,8 +49,10 @@ def tf_idf(corpus):
 
     return df
 
+
 def test():
     corpus = extract_corpus()
     tf_idf(corpus)
+
 
 test()
